@@ -49,7 +49,7 @@ public class ScrapperService {
       AtomicInteger articleId = getSequenceNo(databaseManager, Constants.ARTICLE_TABLE, Constants.ARTICLE_ID_COLUMN);
       AtomicInteger authorId = getSequenceNo(databaseManager, Constants.AUTHOR_TABLE, Constants.AUTHOR_ID_COLUMN);
 
-      for (int i = 0; i < archiveElements.size() && i < config.getMaxNoOfArticlesToScrap(); i++) {
+      for (int i = 0; i < archiveElements.size() && articleId.get() < config.getMaxNoOfArticlesToScrap(); i++) {
         Element element = archiveElements.get(i);
         String articleLink = element.select("a").first().attr("href");
         Document articleDoc = Jsoup.connect(articleLink).get();
@@ -69,7 +69,8 @@ public class ScrapperService {
       String authorName = articleDoc.getElementsByClass("mobile-author").first()
           .getElementsByTag("a").first().text().toLowerCase();
 
-      if (StringUtils.isBlank(title) || StringUtils.isBlank(description) || StringUtils.isBlank(authorName)) {
+      if (StringUtils.isBlank(title) || StringUtils.isBlank(description) || StringUtils.isBlank(authorName)
+          || databaseManager.isArticleAlreadyInDB(title)) {
         return;
       }
       int authorIdInDb = databaseManager.getAuthorIdFromName(authorName);

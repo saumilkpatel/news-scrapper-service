@@ -83,6 +83,20 @@ public class DatabaseManager implements Closeable {
     DatabaseUtils.execute(connection, sql);
   }
 
+  public boolean isArticleAlreadyInDB(String title) {
+    String sql = "SELECT * FROM " + Constants.ARTICLE_TABLE
+        + " WHERE " + Constants.ARTICLE_TITLE_COLUMN + "='" + title + "'";
+    ResultSet resultSet = DatabaseUtils.executeQuery(connection, sql);
+    try {
+      if (resultSet.next()) {
+        return true;
+      }
+    } catch (SQLException e) {
+      LOG.error("error getting articles from db for title : {}", title);
+    }
+    return false;
+  }
+
   public int getMaxID(String table, String field) {
     String sql = "SELECT max(" + field + ") FROM " + table;
     ResultSet resultSet = DatabaseUtils.executeQuery(connection, sql);

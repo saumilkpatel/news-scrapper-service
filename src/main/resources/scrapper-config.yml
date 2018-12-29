@@ -1,6 +1,13 @@
+# articles will be scrapped from below path
 baseUrl: 'https://www.thehindu.com/archive/print'
 dateOfDataToScrap: '2018/12/27'
+
+# below is the denoted path where the database will be stored
 dbOutPath: 'jdbc:sqlite:/home/saumilpatel/Desktop/handzap/%s.db'
 dbName: 'NewsScrapperService'
+
+# turning this true will recreate the database else will append in current one
 recreateDB: false
+
+# will store/append the data of below no of articles
 maxNoOfArticlesToScrap: 20

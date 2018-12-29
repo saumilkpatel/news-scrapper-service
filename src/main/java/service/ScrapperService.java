@@ -36,7 +36,6 @@ public class ScrapperService {
   public void run() {
     DatabaseManager.createTablesIfNotExist(config);
     scrapAndStoreDataIntoDB(config);
-
   }
 
   private void scrapAndStoreDataIntoDB(ScrapperConfig config) {
@@ -64,7 +63,6 @@ public class ScrapperService {
 
   private void populateDataIntoDB(DatabaseManager databaseManager, Document articleDoc, AtomicInteger articleId, AtomicInteger authorId) {
     try {
-
       String title = articleDoc.getElementsByClass("title").first().text();
       String description = articleDoc.getElementsByTag("p").first().text();
       databaseManager.insertIntoArticleTable(articleId.get(), title, description);
@@ -72,12 +70,12 @@ public class ScrapperService {
       String authorName = articleDoc.getElementsByClass("mobile-author").first()
           .getElementsByTag("a").first().text().toLowerCase();
 
-      int authorIdinDb = databaseManager.getAuthorIdFromName(authorName);
-      if (authorIdinDb == -1) {
-        authorIdinDb = authorId.getAndIncrement();
-        databaseManager.insertIntoAuthorTable(authorIdinDb, authorName);
+      int authorIdInDb = databaseManager.getAuthorIdFromName(authorName);
+      if (authorIdInDb == -1) {
+        authorIdInDb = authorId.getAndIncrement();
+        databaseManager.insertIntoAuthorTable(authorIdInDb, authorName);
       }
-      databaseManager.insertIntoAuthorshipTable(authorIdinDb, articleId.getAndIncrement());
+      databaseManager.insertIntoAuthorshipTable(authorIdInDb, articleId.getAndIncrement());
     }
     catch (Exception e) {
       LOG.error("error while populating data into db", e);

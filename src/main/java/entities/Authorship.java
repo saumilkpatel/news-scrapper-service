@@ -1,5 +1,6 @@
 package entities;
 
+@SuppressWarnings("unused")
 public class Authorship {
 
   private long authorId;

@@ -6,4 +6,5 @@ logging:
 server:
   rootPath: /*
 
+# turning this true will scrap the data on server startup based on scrapper-config.yml
 scrappingEnabledOnStartup: false

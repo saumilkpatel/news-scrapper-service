@@ -15,11 +15,9 @@ public class ScrapperApplication {
   private static final Logger LOG = LoggerFactory.getLogger(ScrapperApplication.class);
 
   public static void main(String[] args) {
-
     ScrapperConfig config = loadConfig();
     ScrapperService scrapperService = new ScrapperService(config);
     scrapperService.run();
-
   }
 
   public static ScrapperConfig loadConfig() {
@@ -36,6 +34,4 @@ public class ScrapperApplication {
     }
     return null;
   }
-
-
 }

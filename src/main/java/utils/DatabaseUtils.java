@@ -66,14 +66,13 @@ public class DatabaseUtils {
     if (connection != null) {
       try {
         String sql = "SELECT "+Constants.AUTHOR_ID_COLUMN+" from "+Constants.AUTHOR_TABLE+" WHERE "+Constants.AUTHOR_NAME_COLUMN+"='" + authorName + "'";
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSet resultSet = executeQuery(connection, sql);
         if (resultSet.next()) {
           return resultSet.getInt(Constants.AUTHOR_ID_COLUMN);
         }
         return -1;
       } catch (SQLException e) {
-        e.printStackTrace();
+        LOG.error("error getting author id from given author name : {} from DB", authorName);
       }
     }
     return -1;
@@ -88,5 +87,30 @@ public class DatabaseUtils {
         LOG.error("error while running SQLite query : {}", sql, e);
       }
     }
+  }
+
+  private static ResultSet executeQuery(Connection connection, String sql) {
+    if (connection != null) {
+      try {
+        Statement statement = connection.createStatement();
+        return statement.executeQuery(sql);
+      } catch (SQLException e) {
+        LOG.error("error while running SQLite query : {}", sql, e);
+      }
+    }
+    return null;
+  }
+
+  public static int getMaxID(Connection connection, String table, String field) {
+    String sql = "SELECT max(" + field + ") from " + table;
+    ResultSet resultSet = executeQuery(connection, sql);
+    try {
+      if (resultSet.next()) {
+        return resultSet.getInt(1);
+      }
+    } catch (SQLException e) {
+      LOG.error("error while getting max id from table : {}, for column : {}", table, field, e);
+    }
+    return -1;
   }
 }

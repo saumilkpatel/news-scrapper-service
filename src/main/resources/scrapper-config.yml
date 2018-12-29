@@ -2,5 +2,5 @@ baseUrl: 'https://www.thehindu.com/archive/print'
 dateOfDataToScrap: '2018/12/27'
 dbOutPath: 'jdbc:sqlite:/home/saumilpatel/Desktop/handzap/%s.db'
 dbName: 'NewsScrapperService'
-recreateDB: true
-maxNoOfArticlesToScrap: 50
+recreateDB: false
+maxNoOfArticlesToScrap: 20

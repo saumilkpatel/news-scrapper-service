@@ -5,6 +5,11 @@ public class Authorship {
   private long authorId;
   private long articleId;
 
+  public Authorship(long authorId, long articleId) {
+    this.authorId = authorId;
+    this.articleId = articleId;
+  }
+
   public long getAuthorId() {
     return authorId;
   }

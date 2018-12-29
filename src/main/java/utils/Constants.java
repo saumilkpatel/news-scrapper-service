@@ -12,4 +12,5 @@ public class Constants {
   public static final String AUTHORSHIP_TABLE = "AUTHORSHIP";
   public static final String AUTHORSHIP_ID_COLUMN = "AUTHORSHIP_ID_COLUMN";
 
+  public static final String EMPTY_STRING = "";
 }

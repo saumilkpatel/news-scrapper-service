@@ -1,10 +1,23 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Article {
 
+  @JsonProperty("articleId")
   private int id;
+
+  @JsonProperty("articleTitle")
   private String title;
+
+  @JsonProperty("articleDescription")
   private String description;
+
+  public Article(int id, String title, String description) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+  }
 
   public long getId() {
     return id;

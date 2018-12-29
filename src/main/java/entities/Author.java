@@ -1,9 +1,19 @@
 package entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Author {
 
+  @JsonProperty("authorId")
   private int id;
+
+  @JsonProperty("authorName")
   private String name;
+
+  public Author(int id, String name) {
+    this.id = id;
+    this.name = name;
+  }
 
   public long getId() {
     return id;

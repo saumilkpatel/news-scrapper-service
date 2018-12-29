@@ -1,6 +1,7 @@
 package application;
 
 import config.RestConfig;
+import config.ScrapperConfig;
 import controller.NewsDataController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
@@ -8,6 +9,7 @@ import java.util.EnumSet;
 import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration.Dynamic;
 import org.eclipse.jetty.servlets.CrossOriginFilter;
+import service.ScrapperService;
 
 public class RestApplication extends Application<RestConfig> {
 
@@ -16,9 +18,12 @@ public class RestApplication extends Application<RestConfig> {
   }
 
   @Override
-  public void run(RestConfig config, Environment environment) {
-
-    environment.jersey().register(new NewsDataController(config));
+  public void run(RestConfig restConfig, Environment environment) {
+    ScrapperConfig scrapperConfig = ScrapperApplication.loadConfig();
+    if (restConfig.isScrappingEnabledOnStartup()) {
+      new ScrapperService(scrapperConfig).run();
+    }
+    environment.jersey().register(new NewsDataController(restConfig, scrapperConfig));
     configureCors(environment);
   }
 

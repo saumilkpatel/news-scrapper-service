@@ -6,3 +6,4 @@ logging:
 server:
   rootPath: /*
 
+scrappingEnabledOnStartup: false

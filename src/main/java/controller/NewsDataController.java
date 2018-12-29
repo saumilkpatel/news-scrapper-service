@@ -94,7 +94,7 @@ public class NewsDataController {
     response.setData(null);
     response.setResponseCode(INTERNAL_SERVER_ERROR);
     response.setErrorMsg(e.getLocalizedMessage());
-    LOG.error("error listing available authors", e);
+    LOG.error("error returning valid response", e);
   }
 
 }

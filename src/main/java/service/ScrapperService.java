@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import manager.DatabaseManager;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -65,16 +66,18 @@ public class ScrapperService {
     try {
       String title = articleDoc.getElementsByClass("title").first().text();
       String description = articleDoc.getElementsByTag("p").first().text();
-      databaseManager.insertIntoArticleTable(articleId.get(), title, description);
-
       String authorName = articleDoc.getElementsByClass("mobile-author").first()
           .getElementsByTag("a").first().text().toLowerCase();
 
+      if (StringUtils.isBlank(title) || StringUtils.isBlank(description) || StringUtils.isBlank(authorName)) {
+        return;
+      }
       int authorIdInDb = databaseManager.getAuthorIdFromName(authorName);
       if (authorIdInDb == -1) {
         authorIdInDb = authorId.getAndIncrement();
         databaseManager.insertIntoAuthorTable(authorIdInDb, authorName);
       }
+      databaseManager.insertIntoArticleTable(articleId.get(), title, description);
       databaseManager.insertIntoAuthorshipTable(authorIdInDb, articleId.getAndIncrement());
     }
     catch (Exception e) {

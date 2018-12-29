@@ -79,9 +79,10 @@ public class ScrapperService {
       }
       databaseManager.insertIntoArticleTable(articleId.get(), title, description);
       databaseManager.insertIntoAuthorshipTable(authorIdInDb, articleId.getAndIncrement());
+      LOG.info("populated data in db for articleId : {}, authorId : {}", articleId.get()-1, authorIdInDb);
     }
     catch (Exception e) {
-      LOG.error("error while populating data into db", e);
+      LOG.error("error while populating data into db");
     }
   }
 

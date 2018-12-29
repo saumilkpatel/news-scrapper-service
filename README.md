@@ -86,3 +86,6 @@ Change the **rest-config.yml** appropriately then run this class. Running this c
 **Dropwizard framework is used to build and integrate REST APIs.**
 **Jsoup framework is used for web-scrapping.**
 **Maven architecture is used as Dependency Management Tool.**
+
+**Postman Collection URL for integrted APIs**
+	https://www.getpostman.com/collections/4e6e3cb2cf8cb22ed621

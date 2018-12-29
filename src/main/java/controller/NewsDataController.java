@@ -25,11 +25,9 @@ public class NewsDataController {
   private static final Logger LOG = LoggerFactory.getLogger(NewsDataController.class);
   private static final int OK = Response.Status.OK.getStatusCode();
   private static final int INTERNAL_SERVER_ERROR = Response.Status.INTERNAL_SERVER_ERROR.getStatusCode();
-  private final RestConfig restConfig;
   private final ScrapperConfig scrapperConfig;
 
-  public NewsDataController(RestConfig restConfig, ScrapperConfig scrapperConfig) {
-    this.restConfig = restConfig;
+  public NewsDataController(ScrapperConfig scrapperConfig) {
     this.scrapperConfig = scrapperConfig;
   }
 

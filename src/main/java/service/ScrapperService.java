@@ -49,7 +49,7 @@ public class ScrapperService {
       AtomicInteger articleId = getSequenceNo(databaseManager, Constants.ARTICLE_TABLE, Constants.ARTICLE_ID_COLUMN);
       AtomicInteger authorId = getSequenceNo(databaseManager, Constants.AUTHOR_TABLE, Constants.AUTHOR_ID_COLUMN);
 
-      for (int i = 0; i < archiveElements.size() && articleId.get() < config.getMaxNoOfArticlesToScrap(); i++) {
+      for (int i = 0; i < archiveElements.size() && articleId.get() <= config.getMaxNoOfArticlesToScrap(); i++) {
         Element element = archiveElements.get(i);
         String articleLink = element.select("a").first().attr("href");
         Document articleDoc = Jsoup.connect(articleLink).get();

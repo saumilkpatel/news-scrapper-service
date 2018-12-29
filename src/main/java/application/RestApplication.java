@@ -3,6 +3,7 @@ package application;
 import config.RestConfig;
 import config.ScrapperConfig;
 import controller.NewsDataController;
+import controller.ScrapperController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Environment;
 import java.util.EnumSet;
@@ -23,7 +24,8 @@ public class RestApplication extends Application<RestConfig> {
     if (restConfig.isScrappingEnabledOnStartup()) {
       new ScrapperService(scrapperConfig).run();
     }
-    environment.jersey().register(new NewsDataController(restConfig, scrapperConfig));
+    environment.jersey().register(new ScrapperController());
+    environment.jersey().register(new NewsDataController(scrapperConfig));
     configureCors(environment);
   }
 

@@ -30,7 +30,7 @@ public class ScrapperService {
       String[] split = config.getDbOutPath().split(":");
       File dbFile = new File(split[2]);
       boolean delete = dbFile.exists() && dbFile.delete();
-      LOG.error("Database deleted : {}", delete);
+      LOG.info("Database deleted : {}", delete);
     }
   }
 

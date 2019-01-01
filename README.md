@@ -39,7 +39,7 @@ There are two config files in the project.
 	Change the **scrapper-config.yml** appropriately then run this class. This will scrap the data for a particular date (configurable) limited by the number of articles (configurable) from the URL provided.
 
 2) **RestApplication.java**
-Change the **rest-config.yml** appropriately then run this class. Running this class will start a server. Once started, following APIs can be used for querying.
+Change the **rest-config.yml** appropriately then run this class. Arguments : 1) server 2) path to rest-config.yml. Running this class will start a server. Once started, following APIs can be used for querying.
 
 		1) Search available Authors :
 
@@ -83,8 +83,11 @@ Change the **rest-config.yml** appropriately then run this class. Running this c
 3) After server starts, By hitting API-4 from listed above.
 
 **SQLite database is used for data storage and retrieval**
+
 **Dropwizard framework is used to build and integrate REST APIs.**
+
 **Jsoup framework is used for web-scrapping.**
+
 **Maven architecture is used as Dependency Management Tool.**
 
 **Postman Collection URL for integrted APIs**
